@@ -1142,28 +1142,6 @@
             updateView();
             applySettings();
             
-            // Preload audio - get all audio elements properly
-            const allAudio = document.querySelectorAll('audio');
-            allAudio.forEach(audio => {
-                if (audio && audio.load) {
-                    audio.load();
-                }
-                // Try to enable audio immediately
-                if (audio) {
-                    audio.muted = true;
-                    const playPromise = audio.play();
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            audio.pause();
-                            audio.currentTime = 0;
-                            audio.muted = false;
-                        }).catch(() => {
-                            audio.muted = false;
-                        });
-                    }
-                }
-            });
-
             // Set volume
             updateVolume();
 
